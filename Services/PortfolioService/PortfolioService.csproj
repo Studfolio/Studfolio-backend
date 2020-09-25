@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Studfolio.PortfolioService</AssemblyName>
+    <RootNamespace>Studfolio.PortfolioService</RootNamespace>
+  </PropertyGroup>
+
+</Project>
