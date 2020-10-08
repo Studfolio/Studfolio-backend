@@ -1,5 +1,6 @@
 ﻿using Studfolio.UserService.Database.Entities;
 using System;
+using System.Collections.Generic;
 
 namespace Studfolio.UserService.Repositories.Interfaces
 {
@@ -15,6 +16,12 @@ namespace Studfolio.UserService.Repositories.Interfaces
         /// <param name="userId">Specified id of user.</param>
         /// <returns>User with specified id.</returns>
         DbUser GetUserInfoById(Guid userId);
+
+        /// <summary>
+        /// Returns the list of users with the specified role (student) from database.
+        /// </summary>
+        /// <returns>List of students.</returns>
+        List<DbUser> GetStudentsList();
 
         /// <summary>
         /// Adds a new user to the database.

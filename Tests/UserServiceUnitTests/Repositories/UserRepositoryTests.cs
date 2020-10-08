@@ -62,7 +62,7 @@ namespace Studfolio.UserServiceUnitTests.Repositories
                 FirstName = "FirstName",
                 LastName = "LastName",
                 MiddleName = "MiddleName",
-                Role = 0,
+                Role = 2,
                 AvatarFileId = Guid.NewGuid(),
                 Status = "Status",
                 OrganizationId = Guid.NewGuid(),
@@ -156,6 +156,24 @@ namespace Studfolio.UserServiceUnitTests.Repositories
             Assert.DoesNotThrow(() => repository.EditUser(user));
             Assert.That(dbContext.Users.Find(dbUser.Id).Equals(user));
             Assert.That(dbContext.Users, Is.EquivalentTo(new List<DbUser> { user }));
+        }
+        #endregion
+
+        #region GetStudentsList
+        [Test]
+        public void ShouldGetRightsListWhenDbIsNotEmpty()
+        {
+            Assert.That(repository.GetStudentsList(), Is.EquivalentTo(dbContext.Users.Where(s => s.Role == 2).ToList()));
+        }
+
+        [Test]
+        public void ShouldGetRightListWhenDbIsEmpty()
+        {
+            dbContext.Users.RemoveRange(dbContext.Users);
+            dbContext.SaveChanges();
+
+            Assert.That(repository.GetStudentsList(), Is.Not.Null);
+            Assert.That(dbContext.Users, Is.Empty);
         }
         #endregion
     }

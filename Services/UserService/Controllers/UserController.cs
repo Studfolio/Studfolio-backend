@@ -2,6 +2,7 @@
 using Studfolio.UserService.Commands.Interfaces;
 using Studfolio.UserService.Models;
 using System;
+using System.Collections.Generic;
 
 namespace Studfolio.UserService.Controllers
 {
@@ -15,6 +16,13 @@ namespace Studfolio.UserService.Controllers
             [FromQuery] Guid userId)
         {
             return command.Execute(userId);
+        }
+
+        [HttpGet("getStudentsList")]
+        public List<User> GetStudentsList(
+            [FromServices] IGetStudentsListCommand command)
+        {
+            return command.Execute();
         }
 
         [HttpPost("registerUser")]

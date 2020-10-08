@@ -2,6 +2,7 @@
 using Studfolio.UserService.Database.Entities;
 using Studfolio.UserService.Repositories.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Studfolio.UserService.Repositories
@@ -28,6 +29,18 @@ namespace Studfolio.UserService.Repositories
             }
 
             return dbUser;
+        }
+
+        public List<DbUser> GetStudentsList()
+        {
+            var students = dbContext.Users.Where(dbUser => dbUser.Role == 2).ToList();
+
+            if (students == null)
+            {
+                throw new Exception("Students were not found.");
+            }
+
+            return students;
         }
 
         public Guid CreateUser(DbUser user, DbUserCredentials userCredentials)
