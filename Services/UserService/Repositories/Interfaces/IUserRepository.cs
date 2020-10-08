@@ -15,5 +15,19 @@ namespace Studfolio.UserService.Repositories.Interfaces
         /// <param name="userId">Specified id of user.</param>
         /// <returns>User with specified id.</returns>
         DbUser GetUserInfoById(Guid userId);
+
+        /// <summary>
+        /// Adds a new user to the database.
+        /// </summary>
+        /// <param name="user">User to add.</param>
+        /// <param name="userCredentials">User credentials to add.</param>
+        /// <returns>Guid of added user.</returns>
+        Guid CreateUser(DbUser user, DbUserCredentials userCredentials);
+
+        /// <summary>
+        /// Edits an existing user.
+        /// </summary>
+        /// <param name="user">User to edit.</param>
+        void EditUser(DbUser user);
     }
 }

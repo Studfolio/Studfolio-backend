@@ -24,10 +24,37 @@ namespace Studfolio.UserService.Repositories
 
             if (dbUser == null)
             {
-                throw new Exception("User with this id not found.");
+                throw new Exception("User with this id was not found.");
             }
 
             return dbUser;
+        }
+
+        public Guid CreateUser(DbUser user, DbUserCredentials userCredentials)
+        {
+            if (dbContext.UserCredentials.Any(credentials => userCredentials.Email == credentials.Email))
+            {
+                throw new Exception("Email is already taken.");
+            }
+
+            userCredentials.UserId = user.Id;
+
+            dbContext.Users.Add(user);
+            dbContext.UserCredentials.Add(userCredentials);
+            dbContext.SaveChanges();
+
+            return user.Id;
+        }
+
+        public void EditUser(DbUser user)
+        {
+            if (!dbContext.Users.Any(users => user.Id == users.Id))
+            {
+                throw new Exception("User was not found.");
+            }
+
+            dbContext.Users.Update(user);
+            dbContext.SaveChanges();
         }
     }
 }

@@ -6,6 +6,8 @@ namespace Studfolio.UserService.Database.Entities
     public class DbUserCredentials
     {
         [Key]
+        public Guid Id { get; set; }
+        [Required]
         public Guid UserId { get; set; }
         [Required]
         public string Email { get; set; }

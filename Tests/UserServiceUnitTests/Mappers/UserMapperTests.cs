@@ -9,20 +9,18 @@ namespace Studfolio.UserServiceUnitTests.Mappers
 {
     public class UserMapperTests
     {
-        private IMapper<DbUser, User> mapper;
-
-        private const string FirstName = "Ivan";
-        private const string LastName = "Dudikov";
-        private const bool IsActive = true;
-        private const string Status = "Hello, world!";
+        private IMapper<DbUser, User> mapperDbUserToUser;
+        private IMapper<UserRequest, DbUser> mapperUserRequestToDbUser;
 
         private Guid userId;
         private DbUser dbUser;
+        private UserRequest userRequest;
 
         [SetUp]
         public void SetUp()
         {
-            mapper = new UserMapper();
+            mapperDbUserToUser = new UserMapper();
+            mapperUserRequestToDbUser = new UserMapper();
 
             userId = Guid.NewGuid();
             dbUser = new DbUser
@@ -39,22 +37,52 @@ namespace Studfolio.UserServiceUnitTests.Mappers
                 Verified = true,
                 IsActive = true
             };
+
+            userRequest = new UserRequest
+            {
+                Id = userId,
+                FirstName = "FirstName",
+                LastName = "LastName",
+                MiddleName = "MiddleName",
+                Role = 0,
+                Status = "Status",
+                OrganizationId = Guid.NewGuid(),
+                OrganizationName = "OrganizationName",
+                IsActive = true
+            };
         }
 
         #region IMapper<DbUser, User>
         [Test]
         public void ShouldThrowArgumentNullExceptionWhenDbUserIsNull()
         {
-            Assert.Throws<ArgumentNullException>(() => mapper.Map(null));
+            Assert.Throws<ArgumentNullException>(() => mapperDbUserToUser.Map(null));
         }
 
         [Test]
         public void ShouldReturnUserModelWhenMappingValidDbUser()
         {
-            var resultUserModel = mapper.Map(dbUser);
+            var result = mapperDbUserToUser.Map(dbUser);
 
-            Assert.IsNotNull(resultUserModel);
-            Assert.IsInstanceOf<User>(resultUserModel);
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOf<User>(result);
+        }
+        #endregion
+
+        #region IMapper<UserRequest, DbUser>
+        [Test]
+        public void ShouldThrowArgumentNullExceptionWhenUserRequestIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => mapperUserRequestToDbUser.Map(null));
+        }
+
+        [Test]
+        public void ShouldReturnDbUserModelWhenMappingValid()
+        {
+            var result = mapperUserRequestToDbUser.Map(userRequest);
+
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOf<DbUser>(result);
         }
         #endregion
     }

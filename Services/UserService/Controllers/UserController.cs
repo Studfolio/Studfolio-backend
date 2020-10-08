@@ -17,5 +17,28 @@ namespace Studfolio.UserService.Controllers
             return command.Execute(userId);
         }
 
+        [HttpPost("registerUser")]
+        public Guid CreateUser(
+            [FromServices] ICreateUserCommand command,
+            [FromBody] UserRequest request)
+        {
+            return command.Execute(request);
+        }
+
+        [HttpPost("editUser")]
+        public void EditUser(
+            [FromServices] IEditUserCommand command,
+            [FromBody] UserRequest request)
+        {
+            command.Execute(request);
+        }
+
+        [HttpDelete("disableUser")]
+        public void DisableUserById(
+            [FromServices] IDisableUserCommand command,
+            [FromQuery] Guid userId)
+        {
+            command.Execute(userId);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using FluentValidation;
 using LT.DigitalOffice.Kernel;
 using LT.DigitalOffice.Kernel.Broker;
 using MassTransit;
@@ -16,6 +17,7 @@ using Studfolio.UserService.Mappers.Interfaces;
 using Studfolio.UserService.Models;
 using Studfolio.UserService.Repositories;
 using Studfolio.UserService.Repositories.Interfaces;
+using Studfolio.UserService.Validators;
 
 namespace Studfolio.UserService
 {
@@ -28,8 +30,6 @@ namespace Studfolio.UserService
             Configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<RabbitMQOptions>(Configuration);
@@ -37,8 +37,6 @@ namespace Studfolio.UserService
             services.AddHealthChecks();
 
             services.AddControllers();
-
-            services.AddKernelExtensions(Configuration);
 
             services.AddDbContext<UserServiceDbContext>(options =>
             {
@@ -50,7 +48,10 @@ namespace Studfolio.UserService
             ConfigureCommands(services);
             ConfigureRepositories(services);
             ConfigureMappers(services);
+            ConfigureValidators(services);
             ConfigureMassTransit(services);
+
+            services.AddKernelExtensions();
         }
 
         private void ConfigureMassTransit(IServiceCollection services)
@@ -80,15 +81,24 @@ namespace Studfolio.UserService
         private void ConfigureMappers(IServiceCollection services)
         {
             services.AddTransient<IMapper<DbUser, User>, UserMapper>();
+            services.AddTransient<IMapper<UserRequest, DbUser>, UserMapper>();
+            services.AddTransient<IMapper<UserRequest, DbUserCredentials>, UserCredentialsMapper>();
         }
 
         private void ConfigureCommands(IServiceCollection services)
         {
             services.AddTransient<IGetUserByIdCommand, GetUserInfoByIdCommand>();
+            services.AddTransient<IDisableUserCommand, DisableUserCommand>();
+            services.AddTransient<ICreateUserCommand, CreateUserCommand>();
+            services.AddTransient<IEditUserCommand, EditUserCommand>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        private void ConfigureValidators(IServiceCollection services)
+        {
+            services.AddTransient<IValidator<UserRequest>, UserRequestValidator>();
+        }
+
+        public void Configure(IApplicationBuilder app)
         {
             app.UseHealthChecks("/api/healthcheck");
 
