@@ -17,8 +17,8 @@
     },
     "CVService": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "launchBrowser": false,
+      "applicationUrl": "https://localhost:9807;http://localhost:9808",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

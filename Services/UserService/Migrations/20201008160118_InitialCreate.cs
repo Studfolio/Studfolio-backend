@@ -11,13 +11,14 @@ namespace Studfolio.UserService.Migrations
                 name: "UserCredentials",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false),
                     Email = table.Column<string>(nullable: false),
                     PasswordHash = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserCredentials", x => x.UserId);
+                    table.PrimaryKey("PK_UserCredentials", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -29,9 +30,9 @@ namespace Studfolio.UserService.Migrations
                     LastName = table.Column<string>(nullable: false),
                     MiddleName = table.Column<string>(nullable: true),
                     Role = table.Column<int>(nullable: false),
-                    AvatarFileId = table.Column<Guid>(nullable: true),
+                    AvatarFileId = table.Column<Guid>(nullable: false),
                     Status = table.Column<string>(nullable: true),
-                    OrganizationId = table.Column<Guid>(nullable: true),
+                    OrganizationId = table.Column<Guid>(nullable: false),
                     OrganizationName = table.Column<string>(nullable: true),
                     Verified = table.Column<bool>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false)

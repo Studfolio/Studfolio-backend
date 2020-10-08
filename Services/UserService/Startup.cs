@@ -50,8 +50,6 @@ namespace Studfolio.UserService
             ConfigureMappers(services);
             ConfigureValidators(services);
             ConfigureMassTransit(services);
-
-            services.AddKernelExtensions();
         }
 
         private void ConfigureMassTransit(IServiceCollection services)

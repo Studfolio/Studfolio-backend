@@ -25,7 +25,7 @@ namespace Studfolio.UserService.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AvatarFileId")
+                    b.Property<Guid>("AvatarFileId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FirstName")
@@ -42,7 +42,7 @@ namespace Studfolio.UserService.Migrations
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("OrganizationId")
+                    b.Property<Guid>("OrganizationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("OrganizationName")
@@ -64,7 +64,7 @@ namespace Studfolio.UserService.Migrations
 
             modelBuilder.Entity("Studfolio.UserService.Database.Entities.DbUserCredentials", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -76,7 +76,10 @@ namespace Studfolio.UserService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
 
                     b.ToTable("UserCredentials");
                 });
