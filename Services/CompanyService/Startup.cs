@@ -34,6 +34,8 @@ namespace Studfolio.CompanyService
                 app.UseDeveloperExceptionPage();
             }
 
+            UpdateDatabase(app);
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
