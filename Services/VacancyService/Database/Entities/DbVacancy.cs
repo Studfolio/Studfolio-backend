@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Studfolio.VacancyService.Database.Entities
 {
@@ -12,6 +13,7 @@ namespace Studfolio.VacancyService.Database.Entities
         public Guid AuthorId { get; set; }
         [Required]
         public string Position { get; set; }
+        [NotMapped]
         public ICollection<string> Tags { get; set; }
         public string Description { get; set; }
         public Guid CompanyId { get; set; }
