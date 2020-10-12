@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Studfolio.FileService.Database.Entities
 {
-    public class DBFile
+    public class DbFile
     {
         [Key]
         public Guid Id { get; set; }

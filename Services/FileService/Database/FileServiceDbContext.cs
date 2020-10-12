@@ -10,7 +10,7 @@ namespace Studfolio.FileService.Database
         {
         }
 
-        public DbSet<DBFile> Files { get; set; }
+        public DbSet<DbFile> Files { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
