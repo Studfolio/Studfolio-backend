@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Studfolio.CompanyService.Database.Entities
 {
@@ -15,9 +14,7 @@ namespace Studfolio.CompanyService.Database.Entities
         public string Location { get; set; }
         [Required]
         public bool IsActive { get; set; }
-        [NotMapped]
         public ICollection<Guid> HRIds { get; set; }
-        [NotMapped]
         public ICollection<Guid> VacanciesIds { get; set; }
         [Required]
         public DateTime CreatedAt { get; set; }
