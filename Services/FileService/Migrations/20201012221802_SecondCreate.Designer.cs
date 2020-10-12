@@ -10,8 +10,8 @@ using Studfolio.FileService.Database;
 namespace Studfolio.FileService.Migrations
 {
     [DbContext(typeof(FileServiceDbContext))]
-    [Migration("20201012203822_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201012221802_SecondCreate")]
+    partial class SecondCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,12 +28,15 @@ namespace Studfolio.FileService.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("Content")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ContentExtension")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("isActive")

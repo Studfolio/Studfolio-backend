@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Studfolio.FileService.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class SecondCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,9 +12,9 @@ namespace Studfolio.FileService.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Content = table.Column<byte[]>(nullable: true),
-                    ContentExtension = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
+                    Content = table.Column<byte[]>(nullable: false),
+                    ContentExtension = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     isActive = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
