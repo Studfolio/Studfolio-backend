@@ -1,11 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
+using Studfolio.UserService.Commands.Interfaces;
+using Studfolio.UserService.Models;
 
 namespace Studfolio.UserService.Controllers
 {
-    public class UserCredentialsController
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UserCredentialsController : ControllerBase
     {
+        [HttpPost("changePassword")]
+        public void ChangePassword(
+            [FromServices] IChangePasswordCommand command,
+            [FromBody] ChangePasswordRequest request)
+        {
+            command.Execute(request);
+        }
     }
 }

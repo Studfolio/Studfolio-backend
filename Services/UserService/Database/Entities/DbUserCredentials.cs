@@ -12,6 +12,8 @@ namespace Studfolio.UserService.Database.Entities
         [Required]
         public string Email { get; set; }
         [Required]
+        public string Salt { get; set; }
+        [Required]
         public string PasswordHash { get; set; }
     }
 }

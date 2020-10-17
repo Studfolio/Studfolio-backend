@@ -16,11 +16,13 @@ namespace Studfolio.UserService.Mappers
                 throw new ArgumentNullException(nameof(request));
             }
 
+            string salt = $"{ Guid.NewGuid() }{ Guid.NewGuid() }";
+
             return new DbUserCredentials
             {
                 Id = Guid.NewGuid(),
-                PasswordHash = Encoding.UTF8.GetString(new SHA512Managed().ComputeHash(
-                    Encoding.UTF8.GetBytes(request.Password))),
+                Salt = salt,
+                PasswordHash = UserPassword.GetPasswordHash(request.Email, salt, request.Password),
                 Email = request.Email
             };
         }

@@ -73,6 +73,7 @@ namespace Studfolio.UserService
 
         private void ConfigureRepositories(IServiceCollection services)
         {
+            services.AddTransient<IUserCredentialsRepository, UserCredentialsRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
         }
 
@@ -86,6 +87,7 @@ namespace Studfolio.UserService
         private void ConfigureCommands(IServiceCollection services)
         {
             services.AddTransient<IGetUserByIdCommand, GetUserInfoByIdCommand>();
+            services.AddTransient<IChangePasswordCommand, ChangePasswordCommand>();
             services.AddTransient<IDisableUserCommand, DisableUserCommand>();
             services.AddTransient<ICreateUserCommand, CreateUserCommand>();
             services.AddTransient<IEditUserCommand, EditUserCommand>();
