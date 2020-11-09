@@ -10,7 +10,7 @@ namespace Studfolio.AuthenticationService.Controllers
     [ApiController]
     public class AuthenticationController
     {
-        [HttpPost("login")]
+        [HttpPost("loginUser")]
         public async Task<LoginResult> LoginUser(
             [FromServices] ILoginCommand command,
             [FromBody] LoginRequest userCredentials)
