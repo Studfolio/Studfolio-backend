@@ -3,7 +3,7 @@ using Studfolio.FileService.Database.Entities;
 
 namespace Studfolio.FileService.Database
 {
-    class FileServiceDbContext : DbContext
+    public class FileServiceDbContext : DbContext
     {
         public FileServiceDbContext(DbContextOptions<FileServiceDbContext> options)
             : base(options)

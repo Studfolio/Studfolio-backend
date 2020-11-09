@@ -29,7 +29,7 @@ namespace Studfolio.FileService.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("ContentExtension")
+                    b.Property<string>("Extension")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -37,7 +37,7 @@ namespace Studfolio.FileService.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isActive")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

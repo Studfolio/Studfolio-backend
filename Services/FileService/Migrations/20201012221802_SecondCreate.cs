@@ -1,8 +1,12 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Studfolio.FileService.Database;
 
 namespace Studfolio.FileService.Migrations
 {
+    [DbContext(typeof(FileServiceDbContext))]
+    [Migration("20201012221802_SecondCreate")]
     public partial class SecondCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -13,9 +17,9 @@ namespace Studfolio.FileService.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Content = table.Column<byte[]>(nullable: false),
-                    ContentExtension = table.Column<string>(nullable: false),
+                    Extension = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
-                    isActive = table.Column<bool>(nullable: false)
+                    IsActive = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
